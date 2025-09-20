@@ -1,0 +1,25 @@
+{
+  "name": "lavender-wedding",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "build:css": "postcss styles/input.css -o styles/globals.css",
+    "watch:css": "postcss styles/input.css -o styles/globals.css --watch",
+    "postinstall": "npm run build:css"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "postcss-cli": "latest",
+    "tailwindcss": "latest"
+  }
+}

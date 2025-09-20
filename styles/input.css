@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lavender theme variables */
+:root {
+  --lavender-500: #9f7aea;
+  --lavender-200: #EADBF9;
+}
