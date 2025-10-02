@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ben ❤️ Megha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --lavender: #E6E6FA;
+            --dark-lavender: #9370DB;
+            --white: #FFFFFF;
+            --text-dark: #4A4A4A;
+            --gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        /* Enhanced Falling petals animation */
+        .flower {
+            position: fixed;
+            top: -50px;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(ellipse at center, #D4AF37 0%, #9370DB 30%, #E6E6FA 60%, transparent 80%);
+            border-radius: 50% 0 50% 0;
+            animation: fall linear infinite;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0.8;
+            filter: drop-shadow(0 2px 4px rgba(147, 112, 219, 0.3));
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(calc(100vh + 50px)) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: var(--dark-lavender);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a.active {
+            background: var(--lavender);
+            color: var(--dark-lavender);
+        }
+
+        /* Full Screen Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.2) 0%, 
+                rgba(0, 0, 0, 0.3) 50%, 
+                rgba(0, 0, 0, 0.2) 100%);
+            z-index: 1;
+        }
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    box-shadow: 0 30px 80px rgba(147, 112, 219, 0.4);
+    max-width: 90%;
+    margin: 0 auto;
+    top: 50px; /* pushes the box 50px down */
+}
+
+
+
+        .names {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--dark-lavender);
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        .wedding-date {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold);
+            font-style: italic;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 3;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        /* Section styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark-lavender);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '❤';
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.5rem;
+            color: var(--gold);
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, var(--lavender), var(--white));
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(147, 112, 219, 0.2);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            color: var(--dark-lavender);
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-top: 0.5rem;
+        }
+
+        /* Couple Details */
+        .couple-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .couple-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(147, 112, 219, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .couple-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .couple-card h3 {
+            font-size: 2rem;
+            color: var(--dark-lavender);
+            margin-bottom: 1rem;
+        }
+
+        .couple-card p {
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        /* Events Schedule */
+        .event-card {
+            background: linear-gradient(135deg, var(--white), var(--lavender));
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(147, 112, 219, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: scale(1.02);
+        }
+
+        .event-title {
+            font-size: 2rem;
+            color: var(--dark-lavender);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .event-date {
+            font-size: 1.3rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .location-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .location {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .location h4 {
+            color: var(--dark-lavender);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .location p {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--dark-lavender);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--dark-lavender);
+            border: 2px solid var(--dark-lavender);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-lavender);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Gallery */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            width: 100%;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(147, 112, 219, 0.3);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 70vh;
+            max-height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--lavender);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: linear-gradient(135deg, var(--lavender), var(--white));
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--dark-lavender);
+            z-index: 10;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-button:hover {
+            background: var(--dark-lavender);
+            color: var(--white);
+        }
+
+        .carousel-button.prev {
+            left: 20px;
+        }
+
+        .carousel-button.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--lavender);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--dark-lavender);
+            transform: scale(1.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-lavender), var(--lavender));
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 2rem;
+                max-width: 85%;
+            }
+
+            .names {
+                font-size: 2.2rem;
+            }
+
+            .wedding-date {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1.5rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .carousel-item {
+                height: 50vh;
+            }
+
+            .carousel-button {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+
+            .carousel-button.prev {
+                left: 10px;
+            }
+
+            .carousel-button.next {
+                right: 10px;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .flower {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Large screens optimization */
+        @media (min-width: 1400px) {
+            .carousel-item {
+                height: 80vh;
+                max-height: 1000px;
+            }
+            
+            section {
+                max-width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Falling flowers will be generated by JS -->
+    <div id="flowers"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#couple">Our Story</a>
+            <a href="#events">Events</a>
+            <a href="#gallery">Gallery</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <img src="images/bm1.jpg" alt="Wedding Couple" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="names">Ben & Megha</h1>
+            <p class="wedding-date">May 25, 2026</p>
+        </div>
+        <div class="scroll-indicator">
+            <span style="font-size: 2rem; color: var(--white);">↓</span>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section id="countdown">
+        <h2 class="section-title">Counting Down To Forever</h2>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">0</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">0</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">0</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">0</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Couple Details -->
+    <section id="couple">
+        <h2 class="section-title">Our Story</h2>
+        <div class="couple-container">
+            <div class="couple-card">
+                <h3>The Groom</h3>
+                <h4 style="color: var(--gold); margin-bottom: 1rem;">Ben Linus S</h4>
+                <p>S/O Sunil S</p>
+                <p>Bitherkad</p>
+            </div>
+            <div class="couple-card">
+                <h3>The Bride</h3>
+                <h4 style="color: var(--gold); margin-bottom: 1rem;">Megha Suresh</h4>
+                <p>D/O Suresh George</p>
+                <p>Padanthorai</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Schedule -->
+    <section id="events">
+        <h2 class="section-title">Celebrate With Us</h2>
+        
+        <!-- Engagement -->
+        <div class="event-card">
+            <h3 class="event-title">💍 Engagement Ceremony</h3>
+            <p class="event-date">May 23, 2026 | 10:00 AM</p>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Engagement&details=Engagement%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260523T043000Z/20260523T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Save the Date to Calendar</a>
+            </div>
+            
+            <div class="location-container">
+                <div class="location">
+                    <h4>Church Ceremony</h4>
+                    <p>Lourde Matha Church,<br>Devarshola,<br>The Nilgiris.</p>
+                    <div class="button-group">
+                        <a href="https://maps.app.goo.gl/96qHdVLe17QLuhYW9" target="_blank" class="btn btn-primary">📍 View Map</a>
+                    </div>
+                </div>
+                
+                <div class="location">
+                    <h4>Reception</h4>
+                    <p>Crown Plaza,<br>Padanthorai,<br>The Nilgiris.</p>
+                    <div class="button-group">
+                        <a href="https://maps.app.goo.gl/QBAJqjuZGzvzVzub8" target="_blank" class="btn btn-primary">📍 View Map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wedding -->
+        <div class="event-card">
+            <h3 class="event-title">👑 Wedding Ceremony</h3>
+            <p class="event-date">May 25, 2026 | 10:00 AM</p>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Wedding&details=Wedding%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260525T043000Z/20260525T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Save the Date to Calendar</a>
+            </div>
+            
+            <div class="location-container">
+                <div class="location">
+                    <h4>Church Ceremony</h4>
+                    <p>St.Antony's Church,<br>Bitherkad,<br>The Nilgiris.</p>
+                    <div class="button-group">
+                        <a href="https://maps.app.goo.gl/6fe9kQ1K3ZCseCzR9" target="_blank" class="btn btn-primary">📍 View Map</a>
+                    </div>
+                </div>
+                
+                <div class="location">
+                    <h4>Reception</h4>
+                    <p>Fathima Matha Church,<br>Kunnalady,<br>The Nilgiris.</p>
+                    <div class="button-group">
+                        <a href="https://maps.app.goo.gl/oxpypPsyZzSuUwgr7" target="_blank" class="btn btn-primary">📍 View Map</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <h2 class="section-title">Our Memories</h2>
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item"><img src="images/bm1.jpg" alt="Ben & Megha" /></div>
+                <div class="carousel-item"><img src="images/bm4.jpg" alt="Ben & Megha" /></div>
+                <div class="carousel-item"><img src="images/bm2.jpg" alt="Ben & Megha" /></div>
+                <div class="carousel-item"><img src="images/bm6.jpg" alt="Ben & Megha" /></div>
+                <div class="carousel-item"><img src="images/bm9.jpg" alt="Ben & Megha" /></div>
+            </div>
+            <button class="carousel-button prev" onclick="moveCarousel(-1)">‹</button>
+            <button class="carousel-button next" onclick="moveCarousel(1)">›</button>
+        </div>
+        <div class="carousel-dots" id="dots"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Thank you for being part of our journey</p>
+        <p>Made with 💜 by Ben</p>
+    </footer>
+
+    <script>
+        // Enhanced falling petals animation
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.left = Math.random() * 100 + '%';
+            const duration = (Math.random() * 10 + 8); // 8-18 seconds
+            flower.style.animationDuration = duration + 's';
+            flower.style.width = (Math.random() * 15 + 20) + 'px'; // 20-35px
+            flower.style.height = flower.style.width;
+            
+            // Vary the horizontal drift
+            const drift = (Math.random() - 0.5) * 100;
+            flower.style.setProperty('--drift', drift + 'px');
+            
+            document.getElementById('flowers').appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+
+        // Create petals more frequently for better visibility
+        setInterval(createFlower, 2000);
+        // Create initial batch
+        for(let i = 0; i < 3; i++) {
+            setTimeout(createFlower, i * 500);
+        }
+
+        // Scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const weddingDate = new Date('2026-05-25T10:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Carousel
+        let currentSlide = 0;
+        const carousel = document.getElementById('carousel');
+        const totalSlides = document.querySelectorAll('.carousel-item').length;
+
+        // Create dots
+        const dotsContainer = document.getElementById('dots');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-play carousel
+        setInterval(() => moveCarousel(1), 2000);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active navigation highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        function highlightNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+
+        // Header scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.padding = '0.5rem 2rem';
+            } else {
+                header.style.padding = '1rem 2rem';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
