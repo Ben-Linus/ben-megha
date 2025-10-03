@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ben ❤️ Megha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,7 +23,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Raleway', serif;
             color: var(--text-dark);
             overflow-x: hidden;
             background: var(--white);
@@ -82,6 +85,7 @@
             padding: 0.4rem 0.8rem;
             border-radius: 20px;
             white-space: nowrap;
+            font-family: 'Montserrat', sans-serif;
         }
 
         nav a:hover {
@@ -137,34 +141,44 @@
             z-index: 1;
         }
 
-.hero-content {
-    position: relative;
-    text-align: center;
-    z-index: 2;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border-radius: 30px;
-    box-shadow: 0 30px 80px rgba(147, 112, 219, 0.4);
-    max-width: 90%;
-    margin: 0 auto;
-    top: 50px; /* pushes the box 50px down */
-}
-
-
+        .hero-content {
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            padding: 0;
+            background: transparent;
+            backdrop-filter: none;
+            border-radius: 0;
+            box-shadow: none;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
         .names {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--dark-lavender);
-            margin-bottom: 1rem;
+            font-size: clamp(4rem, 10vw, 8rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
             animation: slideUp 1s ease-out 0.3s both;
+            font-family: 'Rouge Script', cursive;
+            font-weight: 400;
+            text-shadow: 
+                0 0 20px rgba(230, 230, 250, 0.8),
+                0 0 40px rgba(147, 112, 219, 0.6),
+                3px 3px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.05em;
         }
 
         .wedding-date {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--gold);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--lavender);
             font-style: italic;
             animation: slideUp 1s ease-out 0.6s both;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
 
         @keyframes slideUp {
@@ -213,6 +227,8 @@
             text-align: center;
             margin-bottom: 3rem;
             position: relative;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
         }
 
         .section-title::after {
@@ -224,6 +240,38 @@
         }
 
         /* Countdown Timer */
+        .big-date-section {
+            text-align: center;
+            padding: 3rem 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .big-date {
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--dark-lavender);
+            font-family: 'Rouge Script', cursive;
+            margin-bottom: 0.5rem;
+            text-shadow: 
+                0 0 30px rgba(147, 112, 219, 0.4),
+                2px 2px 4px rgba(147, 112, 219, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .date-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
         .countdown {
             display: flex;
             justify-content: center;
@@ -546,6 +594,10 @@
                 width: 20px;
                 height: 20px;
             }
+
+            .big-date {
+                font-size: 3rem;
+            }
         }
 
         /* Large screens optimization */
@@ -582,16 +634,20 @@
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
+            <p class="wedding-date">We're Getting Married</p>
             <h1 class="names">Ben & Megha</h1>
-            <p class="wedding-date">May 25, 2026</p>
         </div>
         <div class="scroll-indicator">
             <span style="font-size: 2rem; color: var(--white);">↓</span>
         </div>
     </section>
 
-    <!-- Countdown Timer -->
+    <!-- Big Date & Countdown Timer -->
     <section id="countdown">
+        <div class="big-date-section">
+            <div class="big-date">May 25, 2026</div>
+            <div class="date-subtitle">SAVE THE DATE</div>
+        </div>
         <h2 class="section-title">Counting Down To Forever</h2>
         <div class="countdown">
             <div class="countdown-item">
@@ -642,7 +698,7 @@
             <p class="event-date">May 23, 2026 | 10:00 AM</p>
             
             <div style="text-align: center; margin-bottom: 2rem;">
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Engagement&details=Engagement%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260523T043000Z/20260523T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Save the Date to Calendar</a>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Engagement&details=Engagement%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260523T043000Z/20260523T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Add to Calendar</a>
             </div>
             
             <div class="location-container">
@@ -670,7 +726,7 @@
             <p class="event-date">May 25, 2026 | 10:00 AM</p>
             
             <div style="text-align: center; margin-bottom: 2rem;">
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Wedding&details=Wedding%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260525T043000Z/20260525T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Save the Date to Calendar</a>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Megha%20Wedding&details=Wedding%20ceremony%20%E2%80%93%20join%20us%20in%20our%20celebration%20%E2%9D%A4%EF%B8%8F&dates=20260525T043000Z/20260525T063000Z" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">📅 Add to Calendar</a>
             </div>
             
             <div class="location-container">
@@ -815,7 +871,7 @@
         // Auto-play carousel
         setInterval(() => moveCarousel(1), 2000);
 
-        // Smooth scrolling
+              // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
